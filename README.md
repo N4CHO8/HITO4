@@ -6,7 +6,9 @@ interna sobre Docker, Linux, Git y procedimientos de soporte.
 
 ## Integrantes
 
-Equipo de 3 estudiantes de ultimo ano de Ingenieria en Computacion e Informatica.
+Ignacio Benegas
+Martin Araya
+Carlos Gonzalez
 
 ## Caso seleccionado
 
