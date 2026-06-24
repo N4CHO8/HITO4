@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1707617e8c192e771ee185940b913d3620ce0b25",
+    "text": "# Preguntas frecuentes de soporte\n\n## Como abrir un ticket de soporte\n\nEl usuario debe enviar una solicitud por el portal de mesa de ayuda o correo de\nsoporte. La solicitud debe incluir descripcion del problema, servicio afectado,\ncapturas de pantalla si existen y horario aproximado en que comenzo el error.\n\n## Que hacer si una aplicacion no responde\n\nPrimero se debe verificar conectividad, revisar si el servicio esta activo,\nconsultar logs recientes y confirmar si hubo cambios de configuracion o\ndespliegues durante el periodo del incidente.\n\n## Como documentar una solucion\n\nLa solucion debe quedar escrita en el ticket con pasos ejecutados, comandos\nrelevantes, resultado obtenido y fuente de informacion utilizada.",
+    "metadata": {
+      "source": "faq.md",
+      "page": "",
+      "chunk": "1"
+    }
+  },
+  {
+    "id": "a2f66e0e6e42b095019bac842df69a1786df507f",
+    "text": "# Manual interno de Docker\n\n## Crear una imagen Docker\n\nPara crear una imagen Docker se debe preparar un archivo llamado `Dockerfile`\nen la raiz del proyecto. El archivo define la imagen base, las dependencias,\nlos archivos que se copian y el comando de inicio.\n\nPasos recomendados:\n\n1. Crear o revisar el `Dockerfile`.\n2. Ejecutar `docker build -t nombre-aplicacion:version .` desde la carpeta del\n proyecto.\n3. Verificar que la imagen exista con `docker images`.\n4. Ejecutar un contenedor de prueba con `docker run --rm nombre-aplicacion:version`.\n\nSi el build falla, se debe revisar el log de la capa que produjo el error y\nconfirmar que los archivos copiados existan en el contexto de construccion.\n\n## Ejecutar contenedores\n\nUn contenedor se puede iniciar con `docker run`. Para publicar un puerto se usa\n`-p puerto_host:puerto_contenedor`. Para variables de entorno se usa `-e`.\n\nEjemplo:",
+    "metadata": {
+      "source": "manual_docker.md",
+      "page": "",
+      "chunk": "1"
+    }
+  },
+  {
+    "id": "953fdf50dfb6727647f8c621b102a6c9874a92fc",
+    "text": "se puede iniciar con `docker run`. Para publicar un puerto se usa\n`-p puerto_host:puerto_contenedor`. Para variables de entorno se usa `-e`.\n\nEjemplo:\n\n```bash\ndocker run --rm -p 8080:80 -e APP_ENV=dev nombre-aplicacion:version\n```\n\n## Revisar logs de un contenedor\n\nLos logs se revisan con `docker logs nombre_contenedor`. Para seguirlos en\ntiempo real se agrega `-f`.",
+    "metadata": {
+      "source": "manual_docker.md",
+      "page": "",
+      "chunk": "2"
+    }
+  },
+  {
+    "id": "b643c092a7ce22d0d9fb357d9dfef11cb1176c65",
+    "text": "# Manual interno de Git\n\n## Actualizar un repositorio\n\nPara actualizar un repositorio Git local se debe confirmar primero la rama\nactual con `git branch` o `git status`. Luego se ejecuta `git pull` para traer\nlos ultimos cambios del remoto configurado.\n\nProcedimiento recomendado:\n\n1. Ejecutar `git status`.\n2. Guardar o confirmar cambios locales antes de actualizar.\n3. Ejecutar `git pull origin nombre-rama`.\n4. Resolver conflictos si Git los informa.\n5. Ejecutar pruebas antes de desplegar.\n\nSi existen cambios locales no confirmados, se puede usar `git stash` antes del\npull y luego `git stash pop`, siempre revisando los archivos modificados.\n\n## Crear una rama\n\nLas ramas nuevas se crean con:\n\n```bash\ngit checkout -b nombre-rama\n```\n\n## Registrar cambios\n\nPara registrar cambios se usa `git add` y `git commit`:\n\n```bash\ngit add archivo\ngit commit -m \"descripcion breve\"\n```",
+    "metadata": {
+      "source": "manual_git.md",
+      "page": "",
+      "chunk": "1"
+    }
+  },
+  {
+    "id": "e9cf8e1e6a922d589216db8074c307f95556c348",
+    "text": "# Manual interno de Linux\n\n## Visualizar procesos\n\nPara visualizar procesos en Linux se recomienda usar `ps aux`, `top` o `htop`.\nEl comando `ps aux` entrega una lista completa con usuario, PID, uso de CPU,\nuso de memoria y comando ejecutado.\n\nComandos utiles:\n\n```bash\nps aux\ntop\nhtop\n```\n\nPara buscar un proceso especifico se puede combinar `ps aux` con `grep`:\n\n```bash\nps aux | grep nombre_servicio\n```\n\n## Revisar uso de disco\n\nEl uso de disco se revisa con `df -h`. Para revisar el peso de directorios se\nusa `du -sh ruta`.\n\n## Revisar servicios\n\nEn sistemas con systemd se usa `systemctl status nombre_servicio` para revisar\nsi un servicio esta activo, detenido o fallando.\n\nSi un servicio falla despues de un despliegue, el primer paso es revisar:",
+    "metadata": {
+      "source": "manual_linux.md",
+      "page": "",
+      "chunk": "1"
+    }
+  },
+  {
+    "id": "d3080ef87f998b20a468407e19ba48001c88c15b",
+    "text": "bre_servicio` para revisar\nsi un servicio esta activo, detenido o fallando.\n\nSi un servicio falla despues de un despliegue, el primer paso es revisar:\n\n1. `systemctl status nombre_servicio`.\n2. `journalctl -u nombre_servicio -n 100`.\n3. Variables de entorno y permisos de archivos.\n4. Conectividad con servicios externos.",
+    "metadata": {
+      "source": "manual_linux.md",
+      "page": "",
+      "chunk": "2"
+    }
+  },
+  {
+    "id": "1254179520c36ce145ce1e14950d0a65d2ca0faf",
+    "text": "# Procedimientos internos de soporte\n\n## Apertura de ticket\n\nTodo incidente debe registrarse como ticket antes de iniciar la atencion. El\nticket debe incluir:\n\n- Nombre del usuario afectado.\n- Servicio o aplicacion comprometida.\n- Descripcion del problema.\n- Hora de inicio.\n- Evidencia disponible, como capturas, logs o mensajes de error.\n- Nivel de prioridad.\n\nLa prioridad alta se usa cuando existe indisponibilidad total, perdida de datos\no impacto en multiples usuarios.\n\n## Diagnostico inicial\n\nEl tecnico debe reproducir el problema o solicitar evidencia. Luego debe revisar\nlogs, conectividad, estado de servicios y cambios recientes. Si el problema\nocurrio despues de un despliegue, se debe comparar la version actual con la\nversion anterior y ejecutar pruebas de humo.\n\n## Escalamiento",
+    "metadata": {
+      "source": "procedimientos_soporte.md",
+      "page": "",
+      "chunk": "1"
+    }
+  },
+  {
+    "id": "4e5d294147ba8f489ecff4389a97e111a29e9d92",
+    "text": "el problema\nocurrio despues de un despliegue, se debe comparar la version actual con la\nversion anterior y ejecutar pruebas de humo.\n\n## Escalamiento\n\nUn ticket se escala cuando supera 30 minutos sin diagnostico claro, afecta a\nmas de un area o requiere permisos que el tecnico no posee.\n\n## Cierre de ticket\n\nPara cerrar un ticket se debe registrar la causa raiz, la solucion aplicada,\nla evidencia de validacion y las recomendaciones para evitar recurrencia.",
+    "metadata": {
+      "source": "procedimientos_soporte.md",
+      "page": "",
+      "chunk": "2"
+    }
+  }
+]
